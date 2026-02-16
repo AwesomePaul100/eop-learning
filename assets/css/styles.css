@@ -44,3 +44,40 @@ h1{font-size:clamp(1.8rem, 2vw + 1.4rem, 2.8rem); line-height:1.2; margin:.2rem 
 @media (max-width: 520px){
   .cards{grid-template-columns:1fr}
 }
+/* Ensure images never overflow their container */
+.figure-wrap img,
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Give the media column full width and prevent bleed */
+.figure-wrap {
+  width: 100%;
+  overflow: hidden;          /* hide any tiny overflows */
+  border-radius: 16px;
+}
+
+/* On narrow screens, stack and add spacing so nothing overlaps */
+@media (max-width: 860px){
+  .grid-2 {
+    grid-template-columns: 1fr;     /* already set in your CSS, keep it */
+    gap: 1.25rem;                   /* a bit more space between text and figure */
+    align-items: start;             /* avoid vertical centering overlap */
+  }
+  .hero {
+    padding-bottom: 2.25rem;        /* extra breathing room */
+  }
+  .figure-wrap img {
+    max-height: 380px;              /* optional: cap height on very tall SVGs */
+    object-fit: contain;
+  }
+}
+
+/* Extra safety for very narrow phones */
+@media (max-width: 420px){
+  .figure-wrap img {
+    max-height: 300px;
+  }
+}
